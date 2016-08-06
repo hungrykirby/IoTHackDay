@@ -1,0 +1,22 @@
+{
+  "name": "iot_hack_day",
+  "version": "0.0.1",
+  "description": "ForIoTHack",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hungrykirby/IoTHackDay.git"
+  },
+  "keywords": [
+    "iot"
+  ],
+  "author": "Katsuki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hungrykirby/IoTHackDay/issues"
+  },
+  "homepage": "https://github.com/hungrykirby/IoTHackDay#readme"
+}
