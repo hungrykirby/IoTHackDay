@@ -18,6 +18,7 @@ $(function() {
         username = data.user.name;
         tweet = data.text;
         console.log(tweet);
+        tweet = data.text.replace(/#(\w+)/gi, '');
       }catch(e){
         console.log(e.message);
       }

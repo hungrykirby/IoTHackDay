@@ -1,0 +1,101 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<mata http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+
+
+<title>コメント漫才</title>
+
+
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+
+<!-- スクロール文字を表示する部分 -->
+<div id="scrm1">あーーーーーーーーーー</div>
+
+<div id="scrm2">ここにtwitter文字</div>
+
+
+</body>
+
+
+
+
+<script type="text/JavaScript">
+<!--
+// 左右往復スクロール
+// Copyright(c)2001 Hikky: http://ww51.tiki.ne.jp/~hiro-e/hikky/
+// Last Modified: 02/07/2002
+
+/*
+body部分の＜div id="scrm2"＞～＜/div＞にスクロールさせる文字を書いてください。
+以下の値をお好みに応じて調節してください。
+moveXm2=...は１度にスクロールする幅です。
+speedm2=...はスクロールする間隔（スピード）です。（ミリ秒単位）
+marginm2=...は左右の余白です。
+　また、スタイルシート部分の#scrm2のtopの値は縦方向の配置です。これもお好みに応じて指定してください。
+*/
+
+
+var obj1=document.getElementById("scrm1");
+var obj2=document.getElementById("scrm2");
+
+obj1.innerHTML ="動いてる？"
+
+
+
+var ioSocket = io.connect( "http://192.168.128.233:3000/" ); // チャットサーバーに接続
+
+ ioSocket.on( "tweet", function( data ) { twitter(data.text) });
+
+function twitter(text){
+obj1.innerHTML = text;
+obj2.innerHTML = text;
+
+}
+
+
+ <!--
+
+moveXm2=6; // １度にスクロールする幅。
+speedm2=85; // スクロールする間隔
+marginm2=10;
+
+tm2=0;
+function scrollm2(){
+
+	obWidth=obj2.offsetWidth;
+	obj2.style.width=obWidth+"px"; // スクロール文字の幅を取得→widthを指定
+	getWinm2();
+	x=winWidth-obWidth-marginm2; // 文字列の初期配置
+	return moveStylem2();
+}
+function getWinm2(){
+	if(document.all) // ブラウザの横幅を取得
+		winWidth=document.body.clientWidth;
+	else if(document.getElementById)
+		winWidth=window.innerWidth;
+}
+function moveStylem2(){
+	getWinm2();
+	if(x<marginm2 || x>winWidth-obWidth-marginm2){ // 端まで進んで反転、10はマージン
+		moveXm2*=-1;
+	}
+	x=x-moveXm2;
+	obj2.style.left=x+"px";  // 文字列の横方向の配置
+	clearTimeout(tm2);
+	tm2=setTimeout("moveStylem2()",speedm2);
+}
+if(document.getElementById)
+	window.onload=scrollm2;
+//-->
+</script>
+
+
+</html>
